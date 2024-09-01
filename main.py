@@ -8,9 +8,9 @@ import re
 def add(numbers: str) -> int:
     """
     Calculate the sum of numbers provided in a string.
-    
+
     The string can contain numbers separated by commas or new lines. 
-    Custom delimiters can be specified in the format `//[delimiter]\n`.
+    Custom delimiters can be specified in the format `//[delimiter]\n` or `//delimiter\n`.
     The function handles:
     - An empty string (returns 0)
     - A single number (returns the number itself)
@@ -30,16 +30,24 @@ def add(numbers: str) -> int:
     """
     if not numbers:
         return 0
-    
+   
+    delimiter = ','
     if numbers.startswith("//"):
-        delimiter, numbers = re.match(r"//(.)\n(.*)", numbers).groups()
-        numbers = numbers.replace(delimiter, ',')
-    
-    numbers = numbers.replace('\n', ',')
-    nums = [int(num) for num in numbers.split(',') if int(num) <= 1000]
+        match = re.match(r"//(\[.*\])\n(.*)", numbers)
+        if match:
+            delimiters, numbers = match.groups()
+            delimiters = re.findall(r'\[(.*?)\]', delimiters)
+            for delim in delimiters:
+                numbers = numbers.replace(delim, ',')
+        else:
+            delimiter = numbers[2]
+            numbers = numbers[4:]
+   
+    numbers = numbers.replace('\n', delimiter)
+    nums = [int(num) for num in numbers.split(delimiter) if int(num) <= 1000]
 
     negatives = [num for num in nums if num < 0]
     if negatives:
         raise ValueError(f"negatives not allowed: {', '.join(map(str, negatives))}")
-    
+   
     return sum(nums)

@@ -55,3 +55,14 @@ def test_ignore_numbers_greater_than_1000():
     """
     assert add("2,1001") == 2
 
+def test_delimiters_of_any_length():
+    """
+    Test that delimiters of any length can be used to separate numbers.
+    """
+    assert add("//[***]\n1***2***3") == 6
+
+def test_multiple_delimiters():
+    """
+    Test that multiple custom delimiters can be used simultaneously.
+    """
+    assert add("//[*][%]\n1*2%3") == 6
