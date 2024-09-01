@@ -12,7 +12,7 @@ def add(numbers: str) -> int:
     The function handles:
     - An empty string (returns 0)
     - A single number (returns the number itself)
-    - Two numbers separated by commas
+    - multiple numbers separated by commas
 
     Args:
         numbers (str): A string containing numbers separated by delimiters.

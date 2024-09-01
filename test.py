@@ -21,3 +21,8 @@ def test_two_numbers():
     """
     assert add("1,2") == 3
 
+def test_multiple_numbers():
+    """
+    Test that multiple numbers separated by commas return their sum.
+    """
+    assert add("1,2,3,4") == 10
