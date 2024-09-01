@@ -17,6 +17,7 @@ def add(numbers: str) -> int:
     - Multiple numbers separated by commas or new lines
     - Custom delimiters of any length
     - Negative numbers (raises an exception with all negative numbers listed)
+    - Numbers greater than 1000 (ignored in the sum)
 
     Args:
         numbers (str): A string containing numbers separated by delimiters.
@@ -35,9 +36,8 @@ def add(numbers: str) -> int:
         numbers = numbers.replace(delimiter, ',')
     
     numbers = numbers.replace('\n', ',')
-    nums = list(map(int, numbers.split(',')))
+    nums = [int(num) for num in numbers.split(',') if int(num) <= 1000]
 
-    # Check for negative numbers
     negatives = [num for num in nums if num < 0]
     if negatives:
         raise ValueError(f"negatives not allowed: {', '.join(map(str, negatives))}")

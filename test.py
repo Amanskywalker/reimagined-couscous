@@ -48,3 +48,10 @@ def test_negative_numbers():
     with pytest.raises(ValueError) as excinfo:
         add("1,-2,3,-4")
     assert str(excinfo.value) == "negatives not allowed: -2, -4"
+
+def test_ignore_numbers_greater_than_1000():
+    """
+    Test that numbers greater than 1000 are ignored in the sum.
+    """
+    assert add("2,1001") == 2
+
