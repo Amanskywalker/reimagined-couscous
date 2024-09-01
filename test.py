@@ -32,3 +32,9 @@ def test_new_lines_between_numbers():
     Test that new lines can be used as delimiters in place of commas.
     """
     assert add("1\n2,3") == 6
+
+def test_different_delimiters():
+    """
+    Test that a custom delimiter can be specified and used for separating numbers.
+    """
+    assert add("//;\n1;2") == 3
