@@ -1,6 +1,8 @@
 """
 Test.py
 """
+import pytest
+
 from main import add
 
 def test_empty_string():
@@ -38,3 +40,11 @@ def test_different_delimiters():
     Test that a custom delimiter can be specified and used for separating numbers.
     """
     assert add("//;\n1;2") == 3
+
+def test_negative_numbers():
+    """
+    Test that passing negative numbers raises a ValueError with all negatives listed.
+    """
+    with pytest.raises(ValueError) as excinfo:
+        add("1,-2,3,-4")
+    assert str(excinfo.value) == "negatives not allowed: -2, -4"

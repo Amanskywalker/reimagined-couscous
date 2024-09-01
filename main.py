@@ -16,6 +16,7 @@ def add(numbers: str) -> int:
     - A single number (returns the number itself)
     - Multiple numbers separated by commas or new lines
     - Custom delimiters of any length
+    - Negative numbers (raises an exception with all negative numbers listed)
 
     Args:
         numbers (str): A string containing numbers separated by delimiters.
@@ -28,15 +29,17 @@ def add(numbers: str) -> int:
     """
     if not numbers:
         return 0
-
-    if not numbers:
-        return 0
     
-    # Check for custom delimiter
     if numbers.startswith("//"):
         delimiter, numbers = re.match(r"//(.)\n(.*)", numbers).groups()
         numbers = numbers.replace(delimiter, ',')
     
     numbers = numbers.replace('\n', ',')
-    nums = map(int, numbers.split(','))
+    nums = list(map(int, numbers.split(',')))
+
+    # Check for negative numbers
+    negatives = [num for num in nums if num < 0]
+    if negatives:
+        raise ValueError(f"negatives not allowed: {', '.join(map(str, negatives))}")
+    
     return sum(nums)
