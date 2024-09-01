@@ -26,3 +26,9 @@ def test_multiple_numbers():
     Test that multiple numbers separated by commas return their sum.
     """
     assert add("1,2,3,4") == 10
+
+def test_new_lines_between_numbers():
+    """
+    Test that new lines can be used as delimiters in place of commas.
+    """
+    assert add("1\n2,3") == 6

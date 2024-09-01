@@ -12,7 +12,7 @@ def add(numbers: str) -> int:
     The function handles:
     - An empty string (returns 0)
     - A single number (returns the number itself)
-    - multiple numbers separated by commas
+    - Multiple numbers separated by commas or new lines
 
     Args:
         numbers (str): A string containing numbers separated by delimiters.
@@ -25,5 +25,7 @@ def add(numbers: str) -> int:
     """
     if not numbers:
         return 0
+
+    numbers = numbers.replace('\n', ',')
     nums = map(int, numbers.split(','))
     return sum(nums)
