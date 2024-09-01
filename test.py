@@ -15,3 +15,9 @@ def test_single_number():
     """
     assert add("1") == 1
 
+def test_two_numbers():
+    """
+    Test that two numbers separated by a comma return their sum.
+    """
+    assert add("1,2") == 3
+
